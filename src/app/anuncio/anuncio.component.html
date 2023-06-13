@@ -2,50 +2,52 @@
 <h1>Cadastro de Anúncios</h1>
 
 <!--Cadastro-->
-<div class="input-group mb-3">
-    <span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="inputGroup-sizing-default">Valor</span>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="inputGroup-sizing-default">Contato</span>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <select class="form-select" aria-label="Default select example">
-    <option selected>Estado</option>
-    <option value="1">Novo</option>
-    <option value="2">Semi-novo</option>
-    <option value="3">Usado</option>
-  </select><br>
-
-  <div class="mb-3">
-    <div class="input-group">
-      <span class="input-group-text" id="basic-addon3">Imagem do Anúncio</span>
-      <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-    </div>
-  </div>
-
-  <!-- Botão -->
-  <div class="d-grid gap-2 d-md-block">
-    <button class="btn btn-primary" type="button">Cadastrar</button>
-  </div>
-  <br>
-
+<form [formGroup]="formGroupAnuncios">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Nome</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="name">
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Valor</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="valor">
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Contato</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" formControlName="contato">
+      </div>
+    
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Estado</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" placeholder="Novo, semi-novo, usado" aria-describedby="inputGroup-sizing-default" formControlName="estado">
+      </div>
+    
+      
+    
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text" id="basic-addon3">Imagem do Anúncio</span>
+          <input type="text" class="form-control" id="basic-url" placeholder="Insira a URL da imagem" aria-describedby="basic-addon3 basic-addon4" formControlName="url">
+        </div>
+      </div>
+    
+      <!-- Botão -->
+      <div class="d-grid gap-2 d-md-block">
+        <button class="btn btn-primary" type="button" (click)="save()">Cadastrar</button>
+      </div>
+      <br>
+    
+</form>
   <!-- Listagem -->
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+<div class="card" style="width: 18rem;" *ngFor="let anuncio of anuncios">
+  <img [src]="anuncio.url" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Nome - ID</h5>
+    <h5 class="card-title">{{anuncio.id}} - {{anuncio.name}} </h5>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">Estado</li>
-    <li class="list-group-item">Valor</li>
-    <li class="list-group-item">Contato</li>
+    <li class="list-group-item">Estado: {{anuncio.estado}}</li>
+    <li class="list-group-item">Valor: {{anuncio.valor}}</li>
+    <li class="list-group-item">Contato: {{anuncio.contato}}</li>
   </ul>
 </div>

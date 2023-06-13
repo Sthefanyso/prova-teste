@@ -12,9 +12,8 @@ import { AnuncioService } from '../anuncio.service';
 export class AnuncioComponent {
   anuncios: Anuncio[] = [];
   formGroupAnuncios: FormGroup;
-  isEditing = false;
 
-  constructor(private AnuncioService: AnuncioService, private formBuilder: FormBuilder) { 
+  constructor(private anuncioService: AnuncioService, private formBuilder: FormBuilder) { 
     this.formGroupAnuncios = this.formBuilder.group({
    id: '',
    name: '',
@@ -30,14 +29,14 @@ export class AnuncioComponent {
 }
 
 loadAnuncios(){
-  this.AnuncioService.getAnuncios().subscribe({
+  this.anuncioService.getAnuncios().subscribe({
       next: data => this.anuncios = data, 
       error: () => console.log('error')
   })
   }
 
 save(){
-    this.AnuncioService.save(this.formGroupAnuncios.value).subscribe({
+    this.anuncioService.save(this.formGroupAnuncios.value).subscribe({
       next: data => {
         this.anuncios.push(data);
         this.formGroupAnuncios.reset();
